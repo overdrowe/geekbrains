@@ -1,10 +1,12 @@
 import UIKit
 
+// Квадратное уравнение
+
 greet(a: 1, b:1, c:-2);
 
 func greet(a: Double, b: Double, c: Double) {
     print("\(a)*x^2 + \(b)x + \(c) = 0");
-    
+
     let bSquared = b * b;
     let discriminant = bSquared - (4 * a * c);
     let isImaginary = discriminant < 0;
@@ -21,5 +23,33 @@ func greet(a: Double, b: Double, c: Double) {
         let totalX2 = topFormula2 / bottomFormula;
 
         print("X = \(totalX) & \(totalX2)");
+    }
+}
+
+// Прямоугольный треугольник
+
+let triangle = RightTriangle(a: 3, b: 4);
+print("Hypotenuse = \(triangle.c)");
+print("S = \(triangle.getArea())");
+print("P = \(triangle.getPerimetr())");
+
+class RightTriangle {
+    
+    init(a: Double, b: Double) {
+        self.a = a;
+        self.b = b;
+        self.c = sqrt(pow(a,2) + pow(b,2));
+    }
+    
+    var a : Double; // Катет
+    var b : Double; // Тоже катет
+    var c : Double; // Не катет (Гипотенуза)
+    
+    func getArea() -> Double {
+        return a * b / 2;
+    }
+    
+    func getPerimetr() -> Double {
+        return a + b + c;
     }
 }

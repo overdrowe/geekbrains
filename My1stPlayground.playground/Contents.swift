@@ -1,10 +1,12 @@
 import UIKit
 
+// Здание #1
+print("Задание #1");
+
+quadraticEquation(a: 1, b:1, c:-2);
+
 // Квадратное уравнение
-
-greet(a: 1, b:1, c:-2);
-
-func greet(a: Double, b: Double, c: Double) {
+func quadraticEquation(a: Double, b: Double, c: Double) {
     print("\(a)*x^2 + \(b)x + \(c) = 0");
 
     let bSquared = b * b;
@@ -26,13 +28,15 @@ func greet(a: Double, b: Double, c: Double) {
     }
 }
 
-// Прямоугольный треугольник
+// Задание #2
+print("\nЗадание #2");
 
 let triangle = RightTriangle(a: 3, b: 4);
 print("Hypotenuse = \(triangle.c)");
 print("S = \(triangle.getArea())");
 print("P = \(triangle.getPerimetr())");
 
+// Прямоугольный треугольник
 class RightTriangle {
     
     init(a: Double, b: Double) {

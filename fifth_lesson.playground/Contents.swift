@@ -31,17 +31,20 @@ protocol Car {
 }
 
 class SportCar : Car {
-    init(brand: String, model: String, generation: Date, trunkCapacity: Double) {
+    init(brand: String, model: String, generation: Date, trunkCapacity: Double, clearance: Double) {
         self.brand = brand;
         self.model = model;
         self.generation = generation;
         self.trunkCapacity = trunkCapacity;
+        self.clearance = clearance;
     }
     
     let brand: String
     let model: String
     let generation: Date
     let trunkCapacity: Double
+    
+    let clearance : Double;
     
     var currentTrunkCapacity: Double = 0;
     var isTrunkFull : Bool {
@@ -89,17 +92,20 @@ class SportCar : Car {
 }
 
 class TrunkCar : Car {
-    init(brand: String, model: String, generation: Date, trunkCapacity: Double) {
+    init(brand: String, model: String, generation: Date, trunkCapacity: Double, loadCapacity: Double) {
         self.brand = brand;
         self.model = model;
         self.generation = generation;
         self.trunkCapacity = trunkCapacity;
+        self.loadCapacity = loadCapacity;
     }
     
     let brand: String
     let model: String
     let generation: Date
     let trunkCapacity: Double
+    
+    let loadCapacity : Double;
     
     var currentTrunkCapacity: Double = 0;
     var isTrunkFull : Bool {
@@ -144,18 +150,50 @@ class TrunkCar : Car {
     }
 }
 
+// Расширения
+
+extension SportCar : CustomStringConvertible {
+    var description: String {
+        return "Это спорткар с клиренсом в \(clearance) сантиметров";
+    }
+}
+
+extension TrunkCar : CustomStringConvertible {
+    var description: String {
+        return "Это грузовик с грузоподъемностью в \(loadCapacity) тонн";
+    }
+}
+
+// Использование
+
 var cars : Array<Car> = [
+    SportCar(
+        brand: "Lada",
+        model: "2101",
+        generation: Date(timeIntervalSinceReferenceDate: -100000000.0),
+        trunkCapacity: 18, // Мешков картошки
+        clearance: 10
+    ),
     SportCar(
         brand: "Lada",
         model: "2106",
         generation: Date(timeIntervalSinceReferenceDate: -123456789.0),
-        trunkCapacity: 20 // Мешков картошки
+        trunkCapacity: 20, // Мешков картошки
+        clearance: 5
+    ),
+    TrunkCar(
+        brand: "Belaz",
+        model: "2",
+        generation: Date(timeIntervalSinceReferenceDate: -20000000.0),
+        trunkCapacity: 20,
+        loadCapacity: 100
     ),
     TrunkCar(
         brand: "Kamaz",
         model: "s63",
         generation: Date(timeIntervalSinceReferenceDate: -80000000.0),
-        trunkCapacity: 8
+        trunkCapacity: 8,
+        loadCapacity: 30
     )
 ]
 
@@ -183,5 +221,13 @@ for car in cars {
     print("trunkCapacity: \t\t\t\t\(car.trunkCapacity)");
     print("isTrunkFull: \t\t\t\t\(car.isTrunkFull)");
     print("isWindowsOpened: \t\t\t\(car.isWindowsOpened)");
+    if (car is SportCar)
+    {
+        print("description: \t\t\t\t\((car as! SportCar).description)");
+    }
+    if (car is TrunkCar)
+    {
+        print("description: \t\t\t\t\((car as! TrunkCar).description)");
+    }
     print("\n");
 }

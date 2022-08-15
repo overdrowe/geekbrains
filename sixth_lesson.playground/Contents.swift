@@ -2,7 +2,7 @@ import UIKit
 
 struct Queue<T> {
     init(elements : [T]){
-        self.elements = elements;
+        self.elements = elements
     };
     
     private var elements: [T] = []
@@ -11,30 +11,34 @@ struct Queue<T> {
         elements.append(element)
     }
     mutating func next() -> T? {
-        return elements.removeFirst()
+        return elements.isEmpty ? nil : elements.removeFirst()
     }
     
     
     subscript(index: Int) -> T? {
-        return (index) > (elements.count - 1) ? nil : elements[index];
+        return (index) > (elements.count - 1) ? nil : elements[index]
     }
     
     func doSomethingImportant(thing: (Int, Int) -> Void) {
-        thing(0, 1);
+        thing(0, 1)
     }
 }
 
-var queue : Queue<Int> = Queue(elements: [1,2,3,4,5]);
+var queue : Queue<Int> = Queue(elements: [1,2,3,4,5])
 
-queue[5];
+queue[5]
 
-queue.add(element: 11);
-queue[5];
+queue.add(element: 11)
+queue[5]
 
-queue[4];
+queue[4]
 
 func superFunction(a: Int, b: Int) -> Void {
-    print("oh, hi Mark!");
+    print("oh, hi Mark!")
 }
 
-queue.doSomethingImportant(thing: superFunction);
+queue.doSomethingImportant(thing: superFunction)
+
+// next() with empty list test
+var testQueue : Queue<Int> = Queue(elements: [])
+testQueue.next()
